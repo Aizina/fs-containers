@@ -1,0 +1,46 @@
+root@a25bde7e25dc:/# apt install -y curl ca-certificates
+Installing:
+  ca-certificates  curl
+
+Summary:
+  Upgrading: 0, Installing: 30, Removing: 0, Not Upgrading: 1
+  Download size: 6619 kB
+  Space needed: 20.1 MB / 1024 GB available
+
+Fetched 6619 kB in 1s (5820 kB/s)
+Setting up ca-certificates (20260816ubuntu0.26.04.2) ...
+Updating certificates in /etc/ssl/certs...
+120 added, 0 removed; done.
+Setting up curl (8.18.0-1ubuntu2.8) ...
+Processing triggers for libc-bin (2.43-2ubuntu2.4) ...
+
+root@a25bde7e25dc:/# curl -sL https://deb.nodesource.com/setup_24.x | bash
+2026-11-12 14:44:51 - Installing pre-requisites
+Fetched 3505 kB in 1s (3015 kB/s)
+Get:1 https://deb.nodesource.com/node_24.x nodistro InRelease [12.1 kB]
+Get:4 https://deb.nodesource.com/node_24.x nodistro/main amd64 Packages [10.2 kB]
+Fetched 22.3 kB in 0s (88.9 kB/s)
+2026-11-12 14:44:58 - Repository configured successfully.
+2026-11-12 14:44:58 - To install Node.js, run: apt install nodejs -y
+
+root@a25bde7e25dc:/# apt install -y nodejs
+Installing:
+  nodejs
+
+Summary:
+  Upgrading: 0, Installing: 12, Removing: 0, Not Upgrading: 1
+  Download size: 46.6 MB
+  Space needed: 273 MB / 1024 GB available
+
+Fetched 46.6 MB in 3s (15.9 MB/s)
+Unpacking nodejs (24.22.3-1nodesource1) ...
+Setting up nodejs (24.22.3-1nodesource1) ...
+Processing triggers for libc-bin (2.43-2ubuntu2.4) ...
+
+root@a25bde7e25dc:/# node --version
+v24.22.3
+
+root@a25bde7e25dc:/# node /usr/src/app/index.js
+Hello World
+
+root@a25bde7e25dc:/#
