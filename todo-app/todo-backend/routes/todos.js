@@ -35,12 +35,25 @@ singleRouter.delete('/', async (req, res) => {
 
 /* GET todo. */
 singleRouter.get('/', async (req, res) => {
-  res.sendStatus(405); // Implement this
+  res.json(req.todo);
 });
 
 /* PUT todo. */
 singleRouter.put('/', async (req, res) => {
-  res.sendStatus(405); // Implement this
+  const { text, done } = req.body;
+
+  if (typeof text !== 'string' || typeof done !== 'boolean') {
+    return res.status(400).json({
+      error: 'Invalid todo data'
+    });
+  }
+
+  req.todo.text = text;
+  req.todo.done = done;
+
+  const updatedTodo = await req.todo.save();
+
+  res.json(updatedTodo);
 });
 
 router.use('/:id', findByIdMiddleware, singleRouter)
