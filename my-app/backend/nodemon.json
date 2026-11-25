@@ -1,0 +1,7 @@
+
+{
+  "watch": ["server", "backend", "config"],
+  "ext": "js",
+  "ignore": ["node_modules"],
+  "legacyWatch": true
+}
