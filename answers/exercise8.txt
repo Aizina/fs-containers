@@ -1,0 +1,56 @@
+
+PS C:\Users\aizin\Documents\fs-containers\todo-app\todo-backend> docker compose -f docker-compose.dev.yml ps
+NAME                   IMAGE     COMMAND                  SERVICE   CREATED          STATUS          PORTS
+todo-backend-mongo-1   mongo:7   "docker-entrypoint.s…"   mongo     26 minutes ago   Up 26 minutes   0.0.0.0:3456->27017/tcp, [::]:3456->27017/tcp
+
+PS C:\Users\aizin\Documents\fs-containers\todo-app\todo-backend> $mongoId = docker compose -f docker-compose.dev.yml ps -q mongo
+
+PS C:\Users\aizin\Documents\fs-containers\todo-app\todo-backend> docker exec -it $mongoId mongosh -u root -p example --authenticationDatabase admin
+Current Mongosh Log ID: 6af71874081e9930ef9f2156
+Connecting to: mongodb://<credentials>@127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&authSource=admin&appName=mongosh+2.14.2
+Using MongoDB: 7.0.48
+Using Mongosh: 2.14.2
+
+test> show dbs
+admin         100.00 KiB
+config        108.00 KiB
+local          72.00 KiB
+the_database   56.00 KiB
+
+test> use the_database
+switched to db the_database
+
+the_database> show collections
+todos
+
+the_database> db.todos.find({})
+[
+  {
+    _id: ObjectId('6af71460ceecc60b9976731d'),
+    text: 'Learn Docker and MongoDB',
+    done: true,
+    __v: 0
+  }
+]
+
+the_database> db.todos.insertOne({
+  text: "Increase the number of tools in my tool belt",
+  done: false
+})
+{
+  acknowledged: true,
+  insertedId: ObjectId('6af718ab081e9930ef9f2157')
+}
+
+the_database> db.todos.find({
+  text: "Increase the number of tools in my tool belt"
+})
+[
+  {
+    _id: ObjectId('6af718ab081e9930ef9f2157'),
+    text: 'Increase the number of tools in my tool belt',
+    done: false
+  }
+]
+
+the_database> exit
