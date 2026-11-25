@@ -1,5 +1,22 @@
 
 services:
+  server:
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      MONGO_URL: mongodb://root:example@mongo:27017/the_database?authSource=admin
+      REDIS_URL: redis://redis:6379
+    depends_on:
+      - mongo
+      - redis
+    command: npm run dev -- --legacy-watch
+
   mongo:
     image: mongo:7
     ports:

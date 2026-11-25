@@ -1,0 +1,23 @@
+PS C:\Users\aizin\Documents\fs-containers\todo-app\todo-backend> docker compose -f docker-compose.dev.yml ps
+NAME                   IMAGE            COMMAND                  SERVICE   CREATED          STATUS          PORTS
+todo-backend-mongo-1   mongo:7          "docker-entrypoint.s…"   mongo     12 days ago      Up 11 minutes   0.0.0.0:3456->27017/tcp, [::]:3456->27017/tcp
+todo-backend-redis-1   redis:7-alpine   "docker-entrypoint.s…"   redis     11 minutes ago   Up 11 minutes   127.0.0.1:34571->6379/tcp
+PS C:\Users\aizin\Documents\fs-containers\todo-app\todo-backend> $redisId = docker compose -f docker-compose.dev.yml ps -q redis
+PS C:\Users\aizin\Documents\fs-containers\todo-app\todo-backend> docker exec -it $redisId redis-cli
+127.0.0.1:6379> KEYS *
+1) "added_todos"
+127.0.0.1:6379> GET added_todos
+"2"
+127.0.0.1:6379> SET added_todos 9001
+OK
+127.0.0.1:6379> GET added_todos
+"9001"
+127.0.0.1:6379> GET added_todos
+"9002"
+127.0.0.1:6379> DEL added_todos
+(integer) 1
+127.0.0.1:6379> GET added_todos
+(nil)
+127.0.0.1:6379> GET added_todos
+"1"
+127.0.0.1:6379> exit
